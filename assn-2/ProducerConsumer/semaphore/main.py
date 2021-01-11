@@ -11,7 +11,7 @@ class SharedVariables:
         self._binSemaphore = threading.Lock()
 
         for i in range(bufferSize):
-            self.full.acquire()
+            self._full.acquire()
 
     def down_empty(self):
         self._empty.acquire()
@@ -83,14 +83,16 @@ class Consumer:
 def handle_producer(id, variables, num_product):
     prod_i = Producer(id)
 
-    for i in range(num_product):
+    # for i in range(num_product):
+    while True:
         prod_i.produce(variables)
 
 
 def handle_consumer(id, variables, num_product):
     con_i = Consumer(id)
 
-    for i in range(num_product):
+    # for i in range(num_product):
+    while True:
         con_i.consume(variables)
 
 if __name__ == '__main__':

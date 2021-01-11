@@ -10,15 +10,19 @@ def getAllFifo():
         ["find", "./fifo", "-type", "p"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     stdout, stderr = findFifo.communicate()
-    stdout = str(stdout.decode("utf-8"))
-    fifos = list(
-        filter(
-            lambda x: len(x) > 0,
-            map(lambda x: x.lstrip(".").lstrip("/"), stdout.split("\n")),
-        )
-    )
 
-    return fifos
+    if not stderr:
+        stdout = str(stdout.decode("utf-8"))
+        fifos = list(
+            filter(
+                lambda x: len(x) > 0,
+                map(lambda x: x.lstrip(".").lstrip("/"), stdout.split("\n")),
+            )
+        )
+
+        return fifos
+    else:
+        return []
 
 
 def broadcastToAll(mssg):

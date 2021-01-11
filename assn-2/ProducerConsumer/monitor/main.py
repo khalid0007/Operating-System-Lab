@@ -91,12 +91,6 @@ class ProducerConsumerMonitor(Monitor):
         self._up_empty()
 
 
-
-    
-
-
-
-
 class Producer:
     def __init__(self, id):
         self.id = id

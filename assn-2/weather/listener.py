@@ -5,11 +5,15 @@ import time
 TERMINATE_MESSAGE = "<!#TERMINATE#!>"
 FIFO = f"fifo/{os.getpid()}"
 
+if os.path.exists('/fifo'):
+    os.mkdir('/fifo')
+
 try:
     os.mkfifo(FIFO, mode=0o600)
 except OSError as oe:
     if oe.errno != errno.EEXIST:
         raise
+
 
 print(f"Starting Listner with PID: {os.getpid()}......")
 

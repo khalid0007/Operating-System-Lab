@@ -17,7 +17,6 @@ class Monitor(object):
         ''' initializes the _lock, threading.Lock() is used by default '''
         self._lock = lock
         
-
     def Condition(self):
         ''' returns a condition bound to this monitor's lock'''
         return threading.Condition(self._lock)
